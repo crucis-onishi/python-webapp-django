@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+ 
+{% block content %}
+<h1 class="mt-5">Djangoで作るサインアップ機能</h1>
+<section>
+    <form method='post'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="サインアップ" size="md" %}
+    </form>
+</section>
+{% endblock %}

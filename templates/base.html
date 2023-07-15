@@ -1,0 +1,57 @@
+{% load django_bootstrap5 %}<!-- カスタムテンプレートタグの読み込み -->
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    {% bootstrap_css %}<!-- BootstrapのCSSの読み込み -->
+    {% bootstrap_javascript %}<!-- BootstrapのJavaScriptの読み込み -->
+    <title>Djangoを使ってみよう！</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+      <div class="container">
+        <a class="navbar-brand" href='{% url "bbs:index" %}'>オちゃんねる</a><!-- トップへ戻る -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarsExample07">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+             <li class="nav-item">
+                {% if user.is_authenticated %}
+                  <span class="nav-link active">{{ user }}でログイン中</span>
+                {% endif %}
+              </li>
+              <li class="nav-item">
+                {% if user.is_authenticated %}
+                    <a class="nav-link active" href="{% url 'logout' %}">ログアウト</a>
+                {% else %}
+                    <a class="nav-link active" href="{% url 'login' %}">ログイン</a>
+                {% endif %}
+              </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown07">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" method="get" action="{% url 'bbs:search' %}">
+            {{ searchform.query }}
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+    {% block content %}
+    {% endblock %}
+    </div>
+  </body>
+</html>

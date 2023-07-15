@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}<!-- カスタムテンプレートタグの読み込み -->
+
+{% block content %}
+
+<h1 class="mt-5">投稿の{{ object|yesno:'編集,新規作成'}}</h1><!-- クラスを設定 -->
+
+<form action='' method='post'>{% csrf_token %}
+    {% bootstrap_form form %}<!-- テンプレートタグでフォームを設置 -->
+    {% bootstrap_button button_type="submit" content=object|yesno:"更新,作成" size="md" %}<!-- テンプレートタグでボタンを設置 -->
+</form>
+
+<div class="mt-3"><!-- クラスを設定 -->
+  <a href='{% url "bbs:index" %}'>{% bootstrap_button button_type="submit" button_class="btn-secondary" content="戻る" size="md" %}<!-- テンプレートタグでボタンを設置 --></a>
+</div>
+
+{% endblock %}

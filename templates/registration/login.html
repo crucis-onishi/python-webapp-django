@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<h1 class="mt-5">Djangoで作るログイン機能</h1>
+{% if user.is_authenticated %}<!-- ユーザーを認証していたら -->
+  <p>{{ user }} でログインしています</p>
+  <a href='{% url "logout" %}'>
+    {% bootstrap_button button_type="submit" button_class="btn-danger" content="ログアウト" size="md" %}
+  </a>
+{% else %}
+  <section>
+    <!-- ログイン用フォーム -->
+    <form action='{% url "login" %}' method='post'>
+      {% csrf_token %}
+      {% bootstrap_form form %}<!-- ログイン用の項目 -->
+      <p>{% bootstrap_button button_type="submit" content="ログイン" size="md" %}</p>
+    </form>
+    <p><a href='{% url "accounts:signup" %}'>{% bootstrap_button button_type="submit" content="新規登録" size="md" %}</a></p><!-- 追記 -->
+  </section>
+{% endif %}
+{% endblock %}

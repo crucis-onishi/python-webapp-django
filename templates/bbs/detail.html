@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}<!-- カスタムテンプレートタグの読み込み -->
+
+{% block content %}
+    <h1 class="mt-5">{{ article.id }}の投稿詳細ページ</h1><!-- クラスを設定 -->
+    <div class="card bg-light shadow-sm mt-3"><!-- クラスを設定 -->
+      <div class="card-body"><!-- クラスを設定 -->
+        <p>{{ article.author }}：{{ article.created_at }}</p>
+        <p>最終更新:{{ article.updated_at }}</p>
+        <p>{{ article.content }}</p>
+
+        <!-- ユーザー情報がその投稿のものと一致する場合 -->
+        {% if request.user.id == object.author_id %}
+            <p><a href='{% url "bbs:update" article.pk %}'>{% bootstrap_button button_type="submit" button_class="btn-success" content="編集" size="md" %}</a></p>
+            <p><a href='{% url "bbs:delete" article.pk %}'>{% bootstrap_button button_type="submit" button_class="btn-danger" content="削除" size="md" %}</a></p>
+        {% endif %}
+        
+      </div>
+    </div>
+    <div class="mt-3"><!-- クラスを設定 -->
+      <a href='{% url "bbs:index" %}'>{% bootstrap_button button_type="submit" button_class="btn-secondary" content="一覧ページへ戻る" size="md" %}<!-- テンプレートタグでボタンを設置 --></a>
+    </div>
+{% endblock %}

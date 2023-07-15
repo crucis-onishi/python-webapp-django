@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}<!-- カスタムテンプレートタグの読み込み -->
+
+{% block content %}
+ 
+<h1 class="mt-5">投稿の削除</h1>
+<p>'{{ object.id }}'の投稿を削除しますか?</p>
+<form action='' method='post'>{% csrf_token %}
+  {% bootstrap_button button_type="submit" button_class="btn-danger" content="削除" size="md" %}<!-- テンプレートタグでボタンを設置 -->
+</form>
+<div class="mt-3"><!-- クラスを設定 -->
+  <a href='{% url "bbs:index" %}'>{% bootstrap_button button_type="submit" button_class="btn-secondary" content="戻る" size="md" %}<!-- テンプレートタグでボタンを設置 --></a>
+</div>
+ 
+{% endblock %}

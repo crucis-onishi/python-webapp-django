@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<h1 class="mt-5">ログアウトしました</h1>
+<p>ご利用ありがとうございました。</p>
+<a href='{% url "login" %}'>
+    {% bootstrap_button button_type="submit" content="ログインページへ" size="md" %}
+</a>
+{% endblock %}

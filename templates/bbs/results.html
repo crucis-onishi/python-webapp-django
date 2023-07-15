@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mt-5">検索結果:</h1>
+    {% if articles %}
+        {% for article in articles %}
+        <div class="card bg-light shadow-sm mt-3">
+            <div class="card-body">
+                <p>{{ article.id }}：{{ article.author }}：{{ article.created_at }}</p>
+                <p><a href='{% url "bbs:detail" article.id %}'>{{ article.content }}</a></p>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>"{{ searchform.query.value }}" に一致する投稿はありません。</p>
+    {% endif %}
+{% endblock %}
